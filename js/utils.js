@@ -32,7 +32,7 @@ var store = {
     },
     'clear' : function(){
         localStorage.clear();
-    }
+    },
 };
 
 // 格式化字符串

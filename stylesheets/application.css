@@ -316,8 +316,8 @@ h2{
 #basic-modal-content {display:none;}
 #simplemodal-overlay { background-color:#000; }
 #simplemodal-container {
-    padding: 20px; 
-    background-color:#fcfcfc; 
+    padding: 20px;
+    background-color:#fcfcfc;
     border-radius:4px;
     -moz-border-radius:4px;
 }
@@ -353,4 +353,8 @@ h2{
 }
 #confirm-popup .btn {
     margin-top:.8em;
+}
+.isShow p {
+  text-align: center;
+  font-size: 1.5em;
 }

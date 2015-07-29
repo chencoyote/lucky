@@ -74,7 +74,7 @@ border: 1px solid #3079ed;
 
 .container {
   width: 800px;
-  margin: 80px auto 20px auto;
+  margin: 40px auto 20px auto;
 }
 
 /**************************************
@@ -93,7 +93,7 @@ border: 1px solid #3079ed;
 
 #lucky-list {
   width: 800px;
-  height: 100px;
+  height: 300px;
   margin: 0px auto;
   overflow: auto;
   word-break:break-all;
@@ -183,11 +183,15 @@ border: 1px solid #3079ed;
    padding:0;
 }
 .row > div  li{
-   margin: 0; 
-   padding:0; 
+   margin: 0;
+   padding:0;
    list-style-type: none;
 }
 
+.isShow p {
+  text-align: center;
+  font-size: 1.5em;
+}
 
 
 #go {
@@ -232,7 +236,7 @@ border: 1px solid #3079ed;
   vertical-align: bottom;
   margin: 1em 0;
 }
-.sponsors-top ul li { 
+.sponsors-top ul li {
   float:left;
   padding: 5px;
   width: 200px;
@@ -268,7 +272,7 @@ common
  **************************************/
 .checkin {
   text-align: center;
-} 
+}
 .checkin .checkin-control{
   font-size: 32px;
   padding: 6px;

@@ -33,7 +33,17 @@ var lucky = (function(){
     this.luckyname = "开始抽奖";
     this.luckylist = []
 
-    this.init = function(data){
+    this.init = function(){
+        var data = Array()
+        var checked_guys = store.get("total");
+        if(!checked_guys) {
+            this.roller.text("尚未导入签到人员名单, 导入后刷新本页");
+            return ;
+        } else {
+            for (var i = Number(checked_guys); i > 0; i--) {
+                data.push(store.get(i))
+            };
+        }
         this.localdata = data;
         store.set("lucky_guy", this.luckylist);
         $("#lucky-name").text(this.luckyname);
@@ -47,12 +57,12 @@ var lucky = (function(){
             this.luckyindex = i-1;
             this.luckyname = name;
 
-            showname = name.split(",")
-            $("#lucky-name").text(showname[0]+","+showname[1]);
+            /*showname = name.split(",")*/
+            $("#lucky-name").text(name);
     };
 
     this.startRolling = function(){
-        
+
         this.intervalID = setInterval(this.rolling, this.speed);
     };
 
@@ -106,7 +116,7 @@ var lucky = (function(){
 })();
 
 $(function(){
-    lucky.init(data);
+    lucky.init();
 	$(".sponsors .unslider").unslider({
         speed: 500,
         delay: 3000
