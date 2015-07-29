@@ -37,8 +37,7 @@ var lucky = (function(){
         var data = Array()
         var checked_guys = store.get("total");
         if(!checked_guys) {
-            this.roller.text("尚未导入签到人员名单, 导入后刷新本页");
-            return ;
+					 this.luckyname = "请先录入名单"
         } else {
             for (var i = Number(checked_guys); i > 0; i--) {
                 data.push(store.get(i))
