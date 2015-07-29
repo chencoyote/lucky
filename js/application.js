@@ -1,33 +1,67 @@
+var Status = {
+  // just a normal guy
+  NORMAL: 0,
+  // lucky guy
+  LUCKY: 1,
+  // lucky guy, but he has leaved
+  LUCKY_BUT_LEAVED: 2,
+};
+
+var status_to_string = function(status){
+  switch (status) {
+  case Status.NORMAL:
+    return '-';
+  case Status.LUCKY:
+    return '中奖';
+  case Status.LUCKY_BUT_LEAVED:
+    return '离开';
+  }
+}
+
+var listShow = function(id) {
+    $("#lucky-list .isShow").removeClass("isShow").addClass("hidden");
+    $(id).removeClass("hidden").addClass("isShow");
+}
+
+
 
 var lucky = (function(){
-
     this.speed = 50;
     this.intervalID;
     this.localdata = "";
-
     this.luckyindex = 0;
     this.luckyname = "开始抽奖";
+    this.luckylist = []
 
-    this.init = function(data){
+    this.init = function(){
+        var data = Array()
+        var checked_guys = store.get("total");
+        if(!checked_guys) {
+					 this.luckyname = "请先录入名单"
+        } else {
+            for (var i = Number(checked_guys); i > 0; i--) {
+                data.push(store.get(i))
+            };
+        }
         this.localdata = data;
+        store.set("lucky_guy", this.luckylist);
         $("#lucky-name").text(this.luckyname);
-
         this._bindUI();
     };
 
     this.rolling = function(){
-
             var i = rand(this.localdata.length+1);
             var name = this.localdata[i-1];
 
             this.luckyindex = i-1;
             this.luckyname = name;
 
+            /*showname = name.split(",")*/
             $("#lucky-name").text(name);
     };
 
     this.startRolling = function(){
-        
+
         this.intervalID = setInterval(this.rolling, this.speed);
     };
 
@@ -38,8 +72,11 @@ var lucky = (function(){
 
     this.showLucky = function(){
         var luckyname = $("#lucky-name").text();
-        $("#lucky-list").append('<span>'+luckyname+"</span>");
-
+        $("#lucky-list .isShow").append('<span>'+luckyname+";</span>");
+        console.log(luckyname,this.luckyname)
+        var ranking = $("#lucky-list .isShow").attr("id")
+        this.luckylist.push(this.luckyname + "," + ranking)
+        store.set("lucky_guy", this.luckylist);
         this.localdata.splice(this.luckyindex, 1);
     };
 
@@ -78,40 +115,34 @@ var lucky = (function(){
 })();
 
 $(function(){
-    lucky.init(data);
+    lucky.init();
 	$(".sponsors .unslider").unslider({
         speed: 500,
         delay: 3000
     });
-	//点击变色
+
 	$("#lucky-list").on("click" ,"span", function(){
 		var $self = $(this);
 		$(this).addClass("red")
-/*				.siblings().removeClass("red");*/
 	});
+
     $("#lucky-list").on("dblclick", "span", function(){
         var $self = $(this);
         $(this).removeClass("red");
     });
-    /*$("#diamond").unslider({
-		complete: function(){
-		}
-	});
-    $("#platinum").unslider();
-    $("#gold").unslider();
-    $("#silver").unslider();
-    $("#bronze").unslider();
-    $("#partner").unslider();*/
-    
-    
+
+    $("#exportlucky").on("click",function(){
+        exportdata = store.get("lucky_guy")
+        var blob = new Blob([exportdata.join("\r\n")], {
+            "type" : "text/plain;charset=utf-8",
+        });
+        var url = URL.createObjectURL(blob);
+        var event = document.createEvent('MouseEvents');
+        event.initMouseEvent('click', true, false);
+        $("<a>").attr("href", url).attr("download",
+            "luckyguys.txt")[0].dispatchEvent(event);
+        URL.revokeObjectURL(url);
+    });
 
 });
-/*$('#gold').carousel({
-        showSurrounding: true 
-        //是否显示周围的区域，不设置则默认为false，个别需要显示旁边元素显示美化效果的需求时用到，如百度相册首页就有这样的效果
-        ,reverse:true //自动动画方向，不设置则默认为向右（false），设置为true则相反
-        ,interval: 1 //自动播放的间隔时间（秒），不设置则默认是5（秒）
-        ,speed: 0.2 //滚动一次需要的时间(秒)，不设置则默认是0.6（秒）
-        ,indicatorPosition: 'top' //指示器（小圆点）的位置（top，bottom），不设置则默认是bottom
-        ,indicatorAlign: 'right' //指示器水平位置（left，center，right），不设置则默认是center
-    });*/
+

@@ -1,6 +1,6 @@
 body {
   font-size: 20px;
-  font-family: 'Microsoft Yahei', "微软雅黑", Tahoma, 'Times New Roman', Arial, Helvetica, STHeiti;
+  font-family: 'Source Sans Pro', Tahoma, 'Times New Roman', 'Helvetica Neue', Arial, 'Source Han Sans', 'Microsoft YaHei', "微软雅黑", STHeiti, sans-serif;
   background: #eee;
   margin: 0;
 }
@@ -30,6 +30,12 @@ filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff4d90fe', en
 filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
 background-repeat: repeat-x;
 border: 1px solid #3079ed;
+}
+
+.btn-danger {
+  color: #fff;
+  background-color: #d9534f;
+  border-color: #d43f3a;
 }
 
 .nav {
@@ -68,8 +74,12 @@ border: 1px solid #3079ed;
 
 .container {
   width: 800px;
-  margin: 80px auto 20px auto;
+  margin: 40px auto 20px auto;
 }
+
+/**************************************
+ lucky
+ **************************************/
 
 .lucky {
   text-align: center;
@@ -83,11 +93,14 @@ border: 1px solid #3079ed;
 
 #lucky-list {
   width: 800px;
-  height: 100px;
+  height: 300px;
   margin: 0px auto;
   overflow: auto;
   word-break:break-all;
   word-wrap:break-word;
+}
+#lucky-list .hidden {
+  display: none;
 }
 
 #lucky-list span {
@@ -102,7 +115,27 @@ border: 1px solid #3079ed;
   display: inline-block;
   cursor: pointer;
 }
+
 #lucky-list span.red {
+  color: #BB5708;
+  background-color: #FFE2DA;
+  border-color: #FFA498;
+}
+
+#lucky-list > div > span {
+  margin: 0 5px 0 0;
+  border: 1px solid transparent;
+  padding: 0px 5px;
+  margin-bottom: 10px;
+  border-radius: 2px;
+  color: #31708f;
+  background-color: #d9edf7;
+  border-color: #85c5e5;
+  display: inline-block;
+  cursor: pointer;
+}
+
+#lucky-list > div > span.red {
   color: #BB5708;
   background-color: #FFE2DA;
   border-color: #FFA498;
@@ -150,11 +183,15 @@ border: 1px solid #3079ed;
    padding:0;
 }
 .row > div  li{
-   margin: 0; 
-   padding:0; 
+   margin: 0;
+   padding:0;
    list-style-type: none;
 }
 
+.isShow p {
+  text-align: center;
+  font-size: 1.5em;
+}
 
 
 #go {
@@ -163,6 +200,16 @@ border: 1px solid #3079ed;
   display: block;
   margin: 0 auto;
   font-size: 22px;
+}
+#ranking {
+  margin: 0,auto;
+}
+
+#ranking a {
+  text-decoration: none;
+  font-size: 15px;
+  color: #999;
+  padding-right: 30px;
 }
 
 .footer {
@@ -189,7 +236,7 @@ border: 1px solid #3079ed;
   vertical-align: bottom;
   margin: 1em 0;
 }
-.sponsors-top ul li { 
+.sponsors-top ul li {
   float:left;
   padding: 5px;
   width: 200px;
@@ -201,4 +248,53 @@ border: 1px solid #3079ed;
   padding: 0;
   vertical-align: bottom;
   margin: 20px 0;
+}
+/**************************************
+common
+ **************************************/
+.top-links {
+  text-align: center;
+}
+.top-link {
+  text-decoration: none;
+  font-size: 15px;
+  color: #999;
+  padding-right: 30px;
+}
+.hide {
+  display: none;
+}
+.text-center {
+  text-align: center;
+}
+/**************************************
+ checkin
+ **************************************/
+.checkin {
+  text-align: center;
+}
+.checkin .checkin-control{
+  font-size: 32px;
+  padding: 6px;
+  line-height: 32px;
+}
+.checkin .success {
+  color: green;
+}
+.checkin .error {
+  color: red;
+}
+/**************************************
+ panel
+ **************************************/
+.panel .hide{
+  display: none;
+}
+.panel .import-status.success {
+  padding-left: 20px;
+  color: green;
+}
+.panel .import-status.error {
+  padding-left: 20px;
+  color: red;
 }
